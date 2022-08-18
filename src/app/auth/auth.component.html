@@ -12,7 +12,7 @@
       <div class="card" style="width: 25rem">
         <img src="../../assets/loginimg.svg" class="card-img-top" alt="..." />
         <div class="card-body">
-          <form>
+          <form [formGroup]="signinForm" (ngSubmit)="onSubmit()">
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label"
                 >Email address</label
@@ -20,22 +20,51 @@
               <input
                 type="email"
                 class="form-control"
-                id="exampleInputEmail1"
-                aria-describedby="emailHelp"
+                formControlName="email"
               />
-              <div id="emailHelp" class="form-text">
-                We'll never share your email with anyone else.
-              </div>
+
+              <span
+                *ngIf="
+                  !signinForm.get('email').valid &&
+                  signinForm.get('email').touched
+                "
+                class="help-block"
+              >
+                <span *ngIf="signinForm.get('email').errors['email']"
+                  >Enter valid email</span
+                >
+
+                <span *ngIf="signinForm.get('email').errors['required']"
+                  >This field is required</span
+                >
+              </span>
             </div>
             <div class="mb-3">
               <label for="exampleInputPassword1" class="form-label"
                 >Password</label
               >
+
               <input
                 type="password"
                 class="form-control"
-                id="exampleInputPassword1"
+                formControlName="password"
               />
+
+              <span
+                *ngIf="
+                  !signinForm.get('password').valid &&
+                  signinForm.get('password').touched
+                "
+                class="help-block"
+              >
+                <span *ngIf="signinForm.get('password').errors['minlength']"
+                  >Password must be at least 6 characters</span
+                >
+
+                <span *ngIf="signinForm.get('password').errors['required']"
+                  >Password is required</span
+                >
+              </span>
             </div>
             <div class="d-grid gap-2">
               <button type="submit" class="btn btn-primary">Submit</button>
