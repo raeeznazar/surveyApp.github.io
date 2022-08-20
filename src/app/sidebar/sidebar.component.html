@@ -1,0 +1,43 @@
+<mat-toolbar>
+  <button
+    mat-icon-button
+    *ngIf="sideNav.mode === 'over'"
+    (click)="sideNav.toggle()"
+  >
+    <mat-icon *ngIf="!sideNav.opened"> menu </mat-icon>
+    <mat-icon *ngIf="sideNav.opened"> close </mat-icon>
+  </button>
+
+  Survey App
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <mat-sidenav
+    #sideNav="matSidenav"
+    class="mat-elevation-z8"
+    mode="side"
+    opened
+  >
+    <button mat-button class="menu-button">
+      <mat-icon>home</mat-icon>
+      <span>Home</span>
+    </button>
+    <button mat-button class="menu-button">
+      <mat-icon>person</mat-icon>
+      <span>User</span>
+    </button>
+    <button mat-button class="menu-button">
+      <mat-icon>insert_chart</mat-icon>
+      <span>Questions</span>
+    </button>
+    <button mat-button class="menu-button">
+      <mat-icon>feedback</mat-icon>
+      <span>Surveys</span>
+    </button>
+
+    <mat-divider></mat-divider>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="content mat-elevation-z8"></div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
