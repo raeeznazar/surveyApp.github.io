@@ -1,4 +1,4 @@
-<mat-toolbar>
+<mat-toolbar class="mat-h1">
   <button
     mat-icon-button
     *ngIf="sideNav.mode === 'over'"
@@ -7,8 +7,8 @@
     <mat-icon *ngIf="!sideNav.opened"> menu </mat-icon>
     <mat-icon *ngIf="sideNav.opened"> close </mat-icon>
   </button>
-
   Survey App
+  <!-- <div class="mat-h3">Survey App</div> -->
 </mat-toolbar>
 
 <mat-sidenav-container>
@@ -38,6 +38,8 @@
     <mat-divider></mat-divider>
   </mat-sidenav>
   <mat-sidenav-content>
-    <div class="content mat-elevation-z8"></div>
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

@@ -1,6 +1,7 @@
 mat-toolbar {
   background: #031059;
   color: #f2f2f2;
+  
 }
 
 mat-sidenav {
@@ -16,16 +17,10 @@ mat-sidenav {
 
 .content {
   height: calc(100vh - 98px);
-  border-radius: 10px;
+  border-radius: 20px;
   margin: 16px;
+  padding: 6px;
   margin-left: 32px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  font-size: 2rem;
-  color: lightgray;
 }
 
 mat-sidenav-container {
@@ -69,7 +64,6 @@ mat-divider {
   margin-bottom: 16px;
   background-color: rgba(255, 255, 255, 0.5);
 }
-
 
 // /* Color Theme Swatches in Hex */
 // .Chainalysis-Corporate-website-1-hex { color: #031059; }

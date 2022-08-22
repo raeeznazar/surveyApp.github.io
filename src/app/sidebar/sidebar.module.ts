@@ -6,18 +6,19 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
-import { AppRoutingModule } from '../app-routing.module';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutModule } from '@angular/cdk/layout';
 import { BrowserModule } from '@angular/platform-browser';
 import { SidebarComponent } from './sidebar.component';
+import { AppRoutingModule } from '../app-routing.module';
 
 @NgModule({
   declarations: [SidebarComponent],
 
   imports: [
-    CommonModule,AppRoutingModule,
-    BrowserModule,
+    CommonModule,
+    AppRoutingModule,
     BrowserAnimationsModule,
     MatToolbarModule,
     MatSidenavModule,

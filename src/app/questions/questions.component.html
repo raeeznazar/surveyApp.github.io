@@ -1,0 +1,54 @@
+<div class="container-fluid">
+  <div class="row">
+    <h1 class="display-2 text-center fw-normal" style="color: #031059">
+      Questions
+    </h1>
+  </div>
+  <div class="row">
+    <div class="offset-md-2 col-md-8">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-xs-12 col-md-4">
+              <label for="question type" class="form-label"
+                >Choose question type</label
+              >
+              <div class="dropdown">
+                <button
+                  style="background-color: #2c3d73; color: white"
+                  class="btn dropdown-toggle"
+                  type="button"
+                  id="dropdownMenuButton1"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Question type
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <li><a class="dropdown-item" href="#">Objective</a></li>
+                  <li><a class="dropdown-item" href="#">Descriptive</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-xs-12 col-md-8">
+              <label for="question description" class="form-label"
+                >Question Description</label
+              >
+              <textarea
+                class="form-control"
+                name=""
+                id=""
+                cols="30"
+                rows="5"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <app-question-table></app-question-table>
+  </div>
+</div>
