@@ -1,0 +1,154 @@
+<div class="container-fluid">
+  <div class="row">
+    <h1 class="display-2 text-center fw-normal" style="color: #031059">
+      Add Questions
+    </h1>
+    <!-- -----------------Reactive form starts----------------- -->
+    <form [formGroup]="submitForm" #ngForm="ngForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="offset-md-2 col-md-8">
+          <div class="card" style="border: 1px solid #2c3d73">
+            <div class="card-body">
+              <div class="row">
+                <!-- ----choose question type---- -->
+                <div class="col-xs-12 col-md-5">
+                  <label for="question type" class="form-label"
+                    >Choose question type</label
+                  >
+
+                  <select
+                    class="form-select"
+                    style="border: 1px solid #2c3d73"
+                    aria-label="Default select example"
+                    formControlName="questionType"
+                  >
+                    <option selected disabled>select question</option>
+                    <option value="1">Subjective</option>
+                    <option value="2">Objective</option>
+                  </select>
+                </div>
+                <div class="col-xs-12 col-md-7">
+                  <label for="question description" class="form-label"
+                    >Question Description</label
+                  >
+                  <textarea
+                    style="border: 1px solid #2c3d73"
+                    formControlName="questionDescription"
+                    class="form-control"
+                    name=""
+                    id=""
+                    cols="30"
+                    rows="5"
+                  ></textarea>
+
+                  <span
+                    class="help-block"
+                    *ngIf="
+                      (ngForm.submitted ||
+                        submitForm.get('questionDescription').touched) &&
+                      !submitForm.get('questionDescription').valid
+                    "
+                    style="color: red"
+                    >This field is required
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ----------------formArray---------------- -->
+      <div class="offset-md-2 col-md-8 mt-3" formArrayName="addQuestionsArray">
+        <div
+          class="row"
+          [ngStyle]="{
+            'margin-left':
+              submitForm.get('addQuestionsArray')['controls'].length > 2
+                ? '45px'
+                : '65px'
+          }"
+          [formGroupName]="i"
+          *ngFor="
+            let addQuestionsControl of submitForm.get('addQuestionsArray')[
+              'controls'
+            ];
+            let i = index
+          "
+        >
+          <div class="col-md-3">
+            <label for="order" class="form-label">No.</label>
+            <input
+              type="text"
+              name=""
+              id=""
+              formControlName="questionOrder"
+              class="form-control"
+              style="border: 1px solid #2c3d73"
+            />
+          </div>
+          <div class="col-md-3">
+            <label for="order" class="form-label">options</label>
+            <input
+              type="text"
+              name=""
+              id=""
+              formControlName="options"
+              class="form-control"
+              style="border: 1px solid #2c3d73"
+            />
+          </div>
+          <div class="col-md-3">
+            <label for="order" class="form-label">Response</label>
+            <input
+              type="text"
+              name=""
+              id=""
+              formControlName="response"
+              class="form-control"
+              style="border: 1px solid #2c3d73"
+            />
+          </div>
+          <div class="col-md-3">
+            <label for="order" class="form-label">Action</label>
+            <div>
+              <button class="btn btn-warning" (click)="onAddQuestions()">
+                +
+              </button>
+              <button
+                class="btn btn-danger ms-2"
+                (click)="onDeleteQuestions()"
+                *ngIf="
+                  submitForm.get('addQuestionsArray')['controls'].length > 2
+                "
+              >
+                -
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- ----------------formArray end---------------- -->
+
+      <div class="row">
+        <div class="offset-md-2 col-md-8 d-md-flex justify-content-md-center">
+          <button
+            type="submit"
+            class="btn m-2 mt-4"
+            style="background: #2c3d73; color: white"
+          >
+            Save
+          </button>
+          <button
+            class="btn m-2 mt-4"
+            style="background: #2c3d73; color: white"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <!-- -----------------Reactive form ends----------------- -->
+  </div>
+</div>

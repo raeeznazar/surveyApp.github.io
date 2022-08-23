@@ -9,18 +9,18 @@ import { AuthModule } from './auth/auth.module';
 
 import { sidebarModule } from './sidebar/sidebar.module';
 import { DashBoardComponent } from './dash-board/dash-board.component';
-import { QuestionsComponent } from './questions/questions.component';
-import { QuestionTableComponent } from './questions/question-table/question-table.component';
-import { QuestionSubjectiveComponent } from './questions/question-subjective/question-subjective.component';
+
+import { questionModule } from './questions/question-add-new/question.module';
 
 @NgModule({
-  declarations: [AppComponent, DashBoardComponent, QuestionsComponent, QuestionTableComponent, QuestionSubjectiveComponent],
+  declarations: [AppComponent, DashBoardComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     AuthModule,
     sidebarModule,
+    questionModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
