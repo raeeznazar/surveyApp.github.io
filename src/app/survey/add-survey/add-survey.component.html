@@ -1,0 +1,464 @@
+<div class="container-fluid pb-4">
+  <!-- create survey selection btn -->
+  <div class="row">
+    <h1 class="display-2 text-center fw-normal" style="color: #031059">
+      Add survey
+    </h1>
+    <div class="col-xs-12 col-md-8 offset-md-2">
+      <div
+        class="row"
+        style="
+          background: #afb9d4;
+          color: white;
+          border-radius: 5px;
+          padding-top: 12px;
+          padding-bottom: 12px;
+        "
+      >
+        <div class="col-md-2">
+          <div
+            class="btn"
+            style="background: #2c3d73; color: white; width: 100%"
+            (click)="onSurvey()"
+          >
+            Survey
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div
+            class="btn"
+            style="background: #2c3d73; color: white; width: 100%"
+            (click)="onSurveyDefinition()"
+          >
+            Survey Definition
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div
+            class="btn"
+            style="background: #2c3d73; color: white; width: 100%"
+            (click)="onResponseDefinition()"
+          >
+            Response Definition
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div
+            class="btn"
+            style="background: #2c3d73; color: white; width: 100%"
+            (click)="onAlertDefinition()"
+          >
+            Alert Definition
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- create survey selection btn end -->
+
+  <form [formGroup]="surveyForm" (ngSubmit)="onSave()">
+    <!-- ###################Survey form###################### -->
+
+    <div class="row mt-4" *ngIf="survey">
+      <div class="col-xs-12 col-md-8 offset-md-2">
+        <div class="row">
+          <div class="card" style="border: 1px solid #2c3d73">
+            <div class="card-body">
+              <!-- first row including clone form, location, department -->
+              <div class="row">
+                <div class="col-md-4">
+                  <label for="clonefrom" class="form-label">Clone form</label>
+                  <input
+                    formControlName="cloneForm"
+                    type="text"
+                    class="form-control"
+                    style="border: 1px solid #2c3d73"
+                  />
+                </div>
+                <div class="col-md-4">
+                  <label for="Location" class="form-label">Location</label>
+                  <select
+                    formControlName="location"
+                    class="form-select"
+                    aria-label="Default select example"
+                    style="border: 1px solid #2c3d73"
+                  >
+                    <option selected disabled>Select location</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <label for="Department" class="form-label">Department</label>
+                  <select
+                    formControlName="department"
+                    class="form-select"
+                    aria-label="Default select example"
+                    style="border: 1px solid #2c3d73"
+                  >
+                    <option selected disabled>Select department</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>
+                </div>
+              </div>
+              <!-- first row including clone form, location, department  end-->
+
+              <!-- Second row including clone form, location, department  start-->
+
+              <div class="row mt-2">
+                <div class="col-md-4">
+                  <label for="Survey Name" class="form-label"
+                    >Survey Name</label
+                  >
+                  <input
+                    formControlName="surveyName"
+                    type="text"
+                    class="form-control"
+                    style="border: 1px solid #2c3d73"
+                  />
+                </div>
+                <div class="col-md-4">
+                  <label for="Age group" class="form-label">Age group</label>
+                  <select
+                    formControlName="ageGroup"
+                    class="form-select"
+                    aria-label="Default select example"
+                    style="border: 1px solid #2c3d73"
+                  >
+                    <option selected disabled>Age group</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <label for="Location" class="form-label">Language</label>
+                  <select
+                    formControlName="language"
+                    class="form-select"
+                    aria-label="Default select example"
+                    style="border: 1px solid #2c3d73"
+                  >
+                    <option selected disabled>Language</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>
+                </div>
+              </div>
+              <!-- Second row including clone form, location, department  end-->
+
+              <!-- third row including clone form, location, department  start-->
+
+              <div class="row mt-2">
+                <div class="col-md-4">
+                  <label for="Survey Name" class="form-label"
+                    >Survey Type</label
+                  >
+                  <select
+                    formControlName="surveyType"
+                    class="form-select"
+                    aria-label="Default select example"
+                    style="border: 1px solid #2c3d73"
+                  >
+                    <option selected disabled>Age group</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <label for="Age group" class="form-label">Header</label>
+                  <input
+                    formControlName="header"
+                    type="text"
+                    class="form-control"
+                    style="border: 1px solid #2c3d73"
+                  />
+                </div>
+                <div class="col-md-4">
+                  <label for="colour" class="form-label">Colour</label>
+                  <input
+                    formControlName="colour"
+                    type="text"
+                    class="form-control"
+                    style="border: 1px solid #2c3d73"
+                  />
+                </div>
+              </div>
+              <!-- third row including clone form, location, department  end-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ##############Survey form end################# -->
+
+    <!-- ####################Survey Definition############### -->
+
+    <div class="row mt-4" *ngIf="surveyDefinition">
+      <div class="col-xs-12 col-md-8 offset-md-2">
+        <div class="row">
+          <div class="card" style="border: 1px solid #2c3d73">
+            <div class="card-body">
+              <!-- row1  email subject, email message-->
+              <div class="row">
+                <div class="col-md-6">
+                  <label for="Email Subject" class="form-label"
+                    >Email Subject</label
+                  >
+                  <input
+                    formControlName="emailSubject"
+                    type="text"
+                    class="form-control"
+                    style="border: 1px solid #2c3d73"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="Email Message" class="form-label"
+                    >Email Message
+                  </label>
+                  <textarea
+                    formControlName="emailMessage"
+                    class="form-control"
+                    name=""
+                    id=""
+                    cols="30"
+                    rows="5"
+                    style="border: 1px solid #2c3d73"
+                  ></textarea>
+                </div>
+              </div>
+              <!-- row1  email subject, email message end-->
+
+              <!-- row2 text message, open/disclaimer -->
+              <div class="row mt-2">
+                <div class="col-md-6">
+                  <label for="Text Message" class="form-label"
+                    >Text Message
+                  </label>
+                  <textarea
+                    formControlName="textMessage"
+                    class="form-control"
+                    name=""
+                    id=""
+                    cols="30"
+                    rows="5"
+                    style="border: 1px solid #2c3d73"
+                  ></textarea>
+                </div>
+                <div class="col-md-6">
+                  <label for="Open / Disclaimer" class="form-label"
+                    >Open / Disclaimer
+                  </label>
+                  <textarea
+                    formControlName="openDisclaimer"
+                    class="form-control"
+                    name=""
+                    id=""
+                    cols="30"
+                    rows="5"
+                    style="border: 1px solid #2c3d73"
+                  ></textarea>
+                </div>
+              </div>
+
+              <!-- row2 text message, open/disclaimer end-->
+
+              <!-- row3 text message, open/disclaimer -->
+              <div class="row mt-2">
+                <div class="col-md-6">
+                  <label for="Close/Thank you" class="form-label"
+                    >Close / Thank you
+                  </label>
+                  <textarea
+                    formControlName="closeThankyou"
+                    class="form-control"
+                    name=""
+                    id=""
+                    cols="30"
+                    rows="5"
+                    style="border: 1px solid #2c3d73"
+                  ></textarea>
+                </div>
+                <div class="col-md-6">
+                  <label for="Thank-you-editor" class="form-label"
+                    >Thank you editor
+                  </label>
+                  <textarea
+                    formControlName="thankYouEditor"
+                    class="form-control"
+                    name=""
+                    id=""
+                    cols="30"
+                    rows="5"
+                    style="border: 1px solid #2c3d73"
+                  ></textarea>
+                </div>
+              </div>
+              <!-- row3 text message, open/disclaimer end-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- #################Survey Definition End############ -->
+
+    <!-- ####################Response Definition############### -->
+    <div class="row mt-4" *ngIf="responseDefinition">
+      <div class="col-xs-12 col-md-8 offset-md-2">
+        <div class="row">
+          <div class="card" style="border: 1px solid #2c3d73">
+            <div class="card-body">
+              <!-- first row subject, header -->
+              <div class="row">
+                <div class="col-md-6">
+                  <label for="subject" class="form-label">Subject</label>
+                  <input
+                    formControlName="subject"
+                    type="text"
+                    class="form-control"
+                    style="border: 1px solid #2c3d73"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="Header" class="form-label">Header</label>
+                  <input
+                    formControlName="header2"
+                    type="text"
+                    class="form-control"
+                    style="border: 1px solid #2c3d73"
+                  />
+                </div>
+              </div>
+              <!-- first row subject, header end -->
+              <!-- Second row subject, header  -->
+              <div class="row mt-2">
+                <div class="col-md-6">
+                  <label for="Email Response Message" class="form-label"
+                    >Email Response Message</label
+                  >
+                  <textarea
+                    formControlName="emailResponseMessage"
+                    name=""
+                    id=""
+                    cols="30"
+                    rows="5"
+                    class="form-control"
+                    style="border: 1px solid #2c3d73"
+                  ></textarea>
+                </div>
+                <div class="col-md-6">
+                  <label for="SMS Response Message" class="form-label"
+                    >SMS Response Message</label
+                  >
+                  <textarea
+                    formControlName="smsResponseMessage"
+                    name=""
+                    id=""
+                    cols="30"
+                    rows="5"
+                    class="form-control"
+                    style="border: 1px solid #2c3d73"
+                  ></textarea>
+                </div>
+              </div>
+              <!-- Second row subject, header end -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ####################Response Definition End############### -->
+
+    <!-- ####################Alert Definition############### -->
+    <div class="row mt-4" *ngIf="alertDefinition">
+      <div class="col-xs-12 col-md-8 offset-md-2">
+        <div class="row">
+          <div class="card" style="border: 1px solid #2c3d73">
+            <div class="card-body">
+              <!-- first row Email -->
+              <div class="row">
+                <div class="row h5" style="color: #031059">Email</div>
+                <div class="col-md-6">
+                  <label for="Regular" class="form-label">Regular</label>
+                  <input
+                    formControlName="regular"
+                    type="text"
+                    class="form-control"
+                    style="border: 1px solid #2c3d73"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="Link" class="form-label">Link</label>
+                  <input
+                    formControlName="link"
+                    type="text"
+                    class="form-control"
+                    style="border: 1px solid #2c3d73"
+                  />
+                </div>
+              </div>
+              <!-- first row Email end -->
+
+              <!-- first row Email -->
+              <div class="row">
+                <div class="row h5 mt-3" style="color: #031059">SMS</div>
+                <div class="col-md-6">
+                  <label for="Regular" class="form-label">Regular</label>
+                  <textarea
+                    formControlName="regular2"
+                    class="form-control"
+                    name=""
+                    id=""
+                    cols="30"
+                    rows="5"
+                    style="border: 1px solid #2c3d73"
+                  ></textarea>
+                </div>
+                <div class="col-md-6">
+                  <label for="Link" class="form-label">Link</label>
+                  <textarea
+                    formControlName="link2"
+                    class="form-control"
+                    name=""
+                    id=""
+                    cols="30"
+                    rows="5"
+                    style="border: 1px solid #2c3d73"
+                  ></textarea>
+                </div>
+              </div>
+              <!-- first row Email end -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col-xs-12 col-md-8 offset-md-2">
+        <div class="row text-center">
+          <div>
+            <button
+              class="btn mx-2"
+              type="submit"
+              style="background: #2c3d73; color: white"
+            >
+              Save
+            </button>
+            <button class="btn" style="background: #2c3d73; color: white">
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

@@ -7,6 +7,9 @@ import { QuestionAddNewComponent } from './questions/question-add-new/question-a
 import { QuestionTableComponent } from './questions/question-table/question-table.component';
 import { QuestionsComponent } from './questions/questions.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { AddSurveyComponent } from './survey/add-survey/add-survey.component';
+import { SurveyQuestionsSettingsComponent } from './survey/survey-questions-settings/survey-questions-settings.component';
+import { SurveyComponent } from './survey/survey.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/sidebar', pathMatch: 'full' },
@@ -19,6 +22,9 @@ const routes: Routes = [
       { path: 'questionTable', component: QuestionTableComponent },
 
       { path: 'question/add', component: QuestionAddNewComponent },
+      { path: 'survey', component: SurveyComponent },
+      { path: 'survey/add', component: AddSurveyComponent },
+      { path: 'survey/settings', component: SurveyQuestionsSettingsComponent },
     ],
   },
 ];

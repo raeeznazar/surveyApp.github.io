@@ -11,9 +11,11 @@ import { sidebarModule } from './sidebar/sidebar.module';
 import { DashBoardComponent } from './dash-board/dash-board.component';
 
 import { questionModule } from './questions/question-add-new/question.module';
+import { Surveymodule } from './survey/survey.module';
+
 
 @NgModule({
-  declarations: [AppComponent, DashBoardComponent],
+  declarations: [AppComponent, DashBoardComponent, ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -21,6 +23,7 @@ import { questionModule } from './questions/question-add-new/question.module';
     AuthModule,
     sidebarModule,
     questionModule,
+    Surveymodule,
   ],
   providers: [],
   bootstrap: [AppComponent],
