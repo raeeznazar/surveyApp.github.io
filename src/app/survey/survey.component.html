@@ -2,9 +2,13 @@
   <!-- add survey btn -->
   <div class="row margin">
     <div class="col-xs-12 col-md-8 offset-md-2">
-      <div class="btn float-end" style="background: #2c3d73; color: white">
+      <button
+        class="btn float-end"
+        (click)="onAddSurvey()"
+        style="background: #2c3d73; color: white"
+      >
         Add new Survey
-      </div>
+      </button>
     </div>
   </div>
 
@@ -16,7 +20,6 @@
       <div class="card" style="background: #2c3d73; color: white">
         <div class="card-body">
           <div class="row">
-
             <!-- select boxes -->
             <div class="col-4">
               <select class="form-select" aria-label="Default select example">
@@ -41,14 +44,13 @@
                 <option value="2">Two</option>
                 <option value="3">Three</option>
               </select>
-                 <!-- select boxes end -->
+              <!-- select boxes end -->
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-
 
   <!-- survey table -->
   <div class="row mt-4">
@@ -103,7 +105,7 @@
             </td> -->
 
             <td class="text-center">
-              <button class="btn btn-hover">
+              <button class="btn btn-hover" title="Edit">
                 <span
                   class="material-symbols-outlined btn-icon"
                   style="color: #2c3d73"
@@ -111,7 +113,7 @@
                   edit
                 </span>
               </button>
-              <button class="btn btn-hover">
+              <button class="btn btn-hover" title="delete">
                 <span
                   class="material-symbols-outlined btn-icon"
                   style="color: #2c3d73"
@@ -119,7 +121,11 @@
                   delete
                 </span>
               </button>
-              <button class="btn btn-hover">
+              <button
+                class="btn btn-hover"
+                (click)="onSurveySettings()"
+                title="settings"
+              >
                 <span
                   class="material-symbols-outlined btn-icon"
                   style="color: #2c3d73"

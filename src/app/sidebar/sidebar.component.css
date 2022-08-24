@@ -11,3 +11,18 @@
     padding: 0px !important;
   }
 }
+
+.active {
+  background: white;
+  color: #2c3d73;
+}
+
+/* logout btn */
+.btn-style {
+  border: none;
+  color: white;
+}
+
+.btn-style:hover {
+  color: red;
+}
