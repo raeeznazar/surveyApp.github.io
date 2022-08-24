@@ -1,0 +1,13 @@
+@media only screen and (max-width: 503px) {
+  .table-special {
+    font-size: 12px !important;
+  }
+}
+
+@media only screen and (max-width: 466px) {
+  .table-special {
+    font-size: 8px !important;
+    padding: 0 !important;
+    margin: 0px !important;
+  }
+}

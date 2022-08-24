@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <!-- add survey btn -->
-  <div class="row">
+  <div class="row margin">
     <div class="col-xs-12 col-md-8 offset-md-2">
       <div class="btn float-end" style="background: #2c3d73; color: white">
         Add new Survey
@@ -12,10 +12,12 @@
 
   <!--  survey select box -->
   <div class="row mt-3">
-    <div class="col-md-8 offset-md-2">
+    <div class="col-xs-12 col-md-8 offset-md-2">
       <div class="card" style="background: #2c3d73; color: white">
         <div class="card-body">
           <div class="row">
+
+            <!-- select boxes -->
             <div class="col-4">
               <select class="form-select" aria-label="Default select example">
                 <option selected disabled>Location</option>
@@ -39,74 +41,96 @@
                 <option value="2">Two</option>
                 <option value="3">Three</option>
               </select>
+                 <!-- select boxes end -->
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <!--  survey select box end -->
+
 
   <!-- survey table -->
   <div class="row mt-4">
     <div class="col-xs-12 col-md-8 offset-md-2">
-      <div class="card" style="border: 1px solid #2c3d73">
-        <div class="card-body">
-          <table class="table">
-            <thead style="background: #2c3d73; color: white">
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Location</th>
-                <th scope="col">Department</th>
-                <th scope="col">Settings</th>
-                <th scope="col">Settings</th>
-                <th scope="col">Settings</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>
-                  <button class="btn btn-hover">
-                    <!-- <span class="material-icons" style="color: #2c3d73">
-                        settings
-                      </span> -->
-
-                    settings
-                  </button>
-                </td>
-
-                <td>
-               
-                    <!-- <span
-                        class="material-symbols-outlined"
-                        style="color: #2c3d73"
-                      >
-                        delete
-                      </span> -->
-                    delete
-                 
-                </td>
-                <td>
-                  <button class="btn btn-hover">
-                    <!-- <span
-                        class="material-symbols-outlined"
-                        style="color: #2c3d73"
-                      >
-                        edit
-                      </span> -->
+      <table class="table">
+        <thead style="background: #2c3d73; color: white">
+          <tr class="text-center">
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Location</th>
+            <th scope="col">Department</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+            <!-- <td>
+              <div>
+                <button class="btn btn-hover">
+                  <span
+                    class="material-symbols-outlined"
+                    style="color: #2c3d73"
+                  >
                     edit
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+                  </span>
+                </button>
+              </div>
+              <div>
+                <button class="btn btn-hover">
+                  <span
+                    class="material-symbols-outlined"
+                    style="color: #2c3d73"
+                  >
+                    delete
+                  </span>
+                </button>
+              </div>
+              <div>
+                <button class="btn btn-hover">
+                  <span
+                    class="material-symbols-outlined"
+                    style="color: #2c3d73"
+                  >
+                    settings
+                  </span>
+                </button>
+              </div>
+            </td> -->
+
+            <td class="text-center">
+              <button class="btn btn-hover">
+                <span
+                  class="material-symbols-outlined btn-icon"
+                  style="color: #2c3d73"
+                >
+                  edit
+                </span>
+              </button>
+              <button class="btn btn-hover">
+                <span
+                  class="material-symbols-outlined btn-icon"
+                  style="color: #2c3d73"
+                >
+                  delete
+                </span>
+              </button>
+              <button class="btn btn-hover">
+                <span
+                  class="material-symbols-outlined btn-icon"
+                  style="color: #2c3d73"
+                >
+                  settings
+                </span>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 

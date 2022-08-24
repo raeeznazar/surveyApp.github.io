@@ -13,9 +13,10 @@ import { DashBoardComponent } from './dash-board/dash-board.component';
 import { questionModule } from './questions/question-add-new/question.module';
 import { Surveymodule } from './survey/survey.module';
 
+import { UsersModule } from './users/users.module';
 
 @NgModule({
-  declarations: [AppComponent, DashBoardComponent, ],
+  declarations: [AppComponent, DashBoardComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -24,6 +25,7 @@ import { Surveymodule } from './survey/survey.module';
     sidebarModule,
     questionModule,
     Surveymodule,
+    UsersModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
