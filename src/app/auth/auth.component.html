@@ -12,7 +12,11 @@
       <div class="card" style="width: 25rem">
         <img src="../../assets/loginimg.svg" class="card-img-top" alt="..." />
         <div class="card-body">
-          <form [formGroup]="signinForm" (ngSubmit)="onSubmit()">
+          <form
+            #authForm="ngForm"
+            [formGroup]="signinForm"
+            (ngSubmit)="onSubmit()"
+          >
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label"
                 >Email address</label
@@ -67,7 +71,20 @@
               </span>
             </div>
             <div class="d-grid gap-2">
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <button
+                type="submit"
+                class="btn btn-primary"
+                [disabled]="!authForm.valid"
+              >
+                Login
+              </button>
+              <button
+                type="submit"
+                class="btn btn-success"
+                [disabled]="!authForm.valid"
+              >
+                Sign Up
+              </button>
             </div>
           </form>
         </div>

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthComponent } from './auth/auth.component';
 
 import { DashBoardComponent } from './dash-board/dash-board.component';
 import { QuestionAddNewComponent } from './questions/question-add-new/question-add-new.component';
@@ -14,6 +15,7 @@ import { CreateUsersComponent } from './users/create-users/create-users.componen
 import { UsersComponent } from './users/users.component';
 
 const routes: Routes = [
+  { path: 'auth', component: AuthComponent },
   { path: '', redirectTo: '/sidebar', pathMatch: 'full' },
   {
     path: 'sidebar',

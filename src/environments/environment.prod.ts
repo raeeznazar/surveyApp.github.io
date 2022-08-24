@@ -1,3 +1,6 @@
+const BASE_URL = 'https://api-beta.s-er.co';
+
 export const environment = {
-  production: true
+  production: true,
+  LOGIN_API: BASE_URL + 'api/v1/login/',
 };

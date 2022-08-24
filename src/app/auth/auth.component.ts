@@ -22,5 +22,6 @@ export class AuthComponent implements OnInit {
 
   onSubmit() {
     console.log(this.signinForm);
+    this.signinForm.reset();
   }
 }
