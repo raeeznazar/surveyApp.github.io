@@ -22,9 +22,9 @@
                 >Email address</label
               >
               <input
-                type="email"
+                type="username"
                 class="form-control"
-                formControlName="email"
+                formControlName="username"
               />
 
               <span
@@ -34,11 +34,9 @@
                 "
                 class="help-block"
               >
-                <span *ngIf="signinForm.get('email').errors['email']"
-                  >Enter valid email</span
-                >
+               
 
-                <span *ngIf="signinForm.get('email').errors['required']"
+                <span *ngIf="signinForm.get('username').errors['required']"
                   >This field is required</span
                 >
               </span>
@@ -61,9 +59,7 @@
                 "
                 class="help-block"
               >
-                <span *ngIf="signinForm.get('password').errors['minlength']"
-                  >Password must be at least 6 characters</span
-                >
+                
 
                 <span *ngIf="signinForm.get('password').errors['required']"
                   >Password is required</span
