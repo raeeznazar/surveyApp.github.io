@@ -20,8 +20,26 @@ export class AuthService {
         tap((resData) => {
           const user = resData;
           this.user.next(user);
+
+          ////store user in the local storage for auto login
+          localStorage.setItem('userData', JSON.stringify(user));
         })
       );
+  }
+
+  ///autologin
+
+  autoLogin() {
+    const userData = JSON.parse(localStorage.getItem('userData'));
+    if (!userData) {
+      return;
+    }
+
+    const loaderUser = userData;
+
+    if (loaderUser.token) {
+      this.user.next(loaderUser);
+    }
   }
 
   // Logout method
