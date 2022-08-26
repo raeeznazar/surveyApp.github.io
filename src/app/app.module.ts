@@ -14,6 +14,9 @@ import { questionModule } from './questions/question-add-new/question.module';
 import { Surveymodule } from './survey/survey.module';
 
 import { UsersModule } from './users/users.module';
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptorService } from './auth/auth-interceptor.service';
 
 @NgModule({
   declarations: [AppComponent, DashBoardComponent],
@@ -26,8 +29,15 @@ import { UsersModule } from './users/users.module';
     questionModule,
     Surveymodule,
     UsersModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

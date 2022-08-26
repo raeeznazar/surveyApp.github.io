@@ -1,6 +1,7 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
+import { AuthService } from 'app/auth/auth.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -8,11 +9,13 @@ import { MatSidenav } from '@angular/material/sidenav';
   styleUrls: ['./sidebar.component.css', './sidebar.component.scss'],
 })
 export class SidebarComponent {
-
   @ViewChild(MatSidenav)
-  sideNav:any = MatSidenav;
+  sideNav: any = MatSidenav;
 
-  constructor(private observer: BreakpointObserver) {}
+  constructor(
+    private observer: BreakpointObserver,
+    private authService: AuthService
+  ) {}
 
   ngAfterViewInit() {
     this.observer.observe(['(max-width: 800px)']).subscribe((res) => {
@@ -24,5 +27,9 @@ export class SidebarComponent {
         this.sideNav.open();
       }
     });
+  }
+
+  onLogout() {
+    this.authService.logout();
   }
 }

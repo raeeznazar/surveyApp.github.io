@@ -15,13 +15,14 @@ import { CreateUsersComponent } from './users/create-users/create-users.componen
 import { UsersComponent } from './users/users.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: '/auth', pathMatch: 'full' },
   { path: 'auth', component: AuthComponent },
-  { path: '', redirectTo: '/sidebar', pathMatch: 'full' },
+
   {
     path: 'sidebar',
     component: SidebarComponent,
     children: [
-      { path: '', component: DashBoardComponent },
+      { path: 'dashboard', component: DashBoardComponent },
       { path: 'questions', component: QuestionsComponent },
       { path: 'questionTable', component: QuestionTableComponent },
 

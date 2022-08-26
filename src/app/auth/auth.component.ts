@@ -1,15 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.css'],
 })
-
 export class AuthComponent implements OnInit {
   signinForm: FormGroup;
-  constructor() {}
+  isLoading = false;
+  error: string = null;
+
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.signinForm = new FormGroup({
@@ -19,9 +23,27 @@ export class AuthComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.signinForm);
+    // it should not be trigger if the form is invalid (if user manually enable using browser developer tool, so this gives extra validation steps)
+    if (!this.signinForm.valid) {
+      return;
+    }
 
     const username = this.signinForm.value.username;
+    const password = this.signinForm.value.password;
+    this.isLoading = true;
+    // injecting service from authService
+    this.authService.signin(username, password).subscribe((resData: any) => {
+      console.log(resData);
+      this.isLoading = false;
+
+      if (resData.status == 0) {
+        this.error = null;
+        this.router.navigate(['sidebar/dashboard']);
+      } else {
+        this.error = resData.message;
+      }
+    });
+
     this.signinForm.reset();
   }
 }
