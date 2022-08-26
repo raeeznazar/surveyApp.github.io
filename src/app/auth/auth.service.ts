@@ -37,7 +37,7 @@ export class AuthService {
 
     const loaderUser = userData;
 
-    if (loaderUser.token) {
+    if (loaderUser.access_token) {
       this.user.next(loaderUser);
     }
   }
@@ -49,9 +49,7 @@ export class AuthService {
     localStorage.removeItem('userData');
   }
 
-  autoLogout(expirationDuration:number){
-    setTimeout(()=>{
-      
-    })
+  autoLogout(expirationDuration: number) {
+    setTimeout(() => {});
   }
 }

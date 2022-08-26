@@ -37,10 +37,13 @@ export class AuthComponent implements OnInit {
       this.isLoading = false;
 
       if (resData.status == 0) {
-        this.error = null;
+        this.error = '';
         this.router.navigate(['sidebar/dashboard']);
       } else {
         this.error = resData.message;
+        setTimeout(() => {
+          this.error = null;
+        }, 2000);
       }
     });
 

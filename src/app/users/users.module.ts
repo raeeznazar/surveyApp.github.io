@@ -6,7 +6,9 @@ import { UsersListComponent } from './users-list/users-list.component';
 import { CreateUsersComponent } from './create-users/create-users.component';
 
 @NgModule({
-  declarations: [UsersComponent, UsersListComponent, CreateUsersComponent],
+  declarations: [UsersComponent, 
+    UsersListComponent, 
+    CreateUsersComponent],
   imports: [CommonModule, ReactiveFormsModule],
 })
 export class UsersModule {}
