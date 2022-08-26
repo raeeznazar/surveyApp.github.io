@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthComponent } from './auth/auth.component';
+import { AuthGuard } from './auth/auth.guard';
 
 import { DashBoardComponent } from './dash-board/dash-board.component';
 import { QuestionAddNewComponent } from './questions/question-add-new/question-add-new.component';
@@ -20,7 +21,7 @@ const routes: Routes = [
 
   {
     path: 'sidebar',
-    component: SidebarComponent,
+    component: SidebarComponent, canActivate:[AuthGuard],
     children: [
       { path: 'dashboard', component: DashBoardComponent },
       { path: 'questions', component: QuestionsComponent },
