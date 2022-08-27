@@ -18,36 +18,60 @@
   <div class="row mt-3">
     <div class="col-xs-12 col-md-8 offset-md-2">
       <div class="card" style="background: #2c3d73; color: white">
-        <div class="card-body">
-          <div class="row">
-            <!-- select boxes -->
-            <div class="col-4">
-              <select class="form-select" aria-label="Default select example">
-                <option selected disabled>Location</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-              </select>
-            </div>
-            <div class="col-4">
-              <select class="form-select" aria-label="Default select example">
-                <option selected disabled>Department</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-              </select>
-            </div>
-            <div class="col-4">
-              <select class="form-select" aria-label="Default select example">
-                <option selected disabled>Survey type</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-              </select>
-              <!-- select boxes end -->
+        <form [formGroup]="surveyForm">
+          <div class="card-body">
+            <div class="row">
+              <!-- select boxes -->
+              <div class="col-4">
+                <label for="location" class="form-label text-light"
+                  >Location</label
+                >
+                <select
+                  class="form-select"
+                  aria-label="Default select example"
+                  formControlName="surveyLocation"
+                >
+                  <option
+                    [value]="location.HospitalId"
+                    *ngFor="let location of locations"
+                  >
+                    {{ location.Name }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-4">
+                <label for="location" class="form-label text-light"
+                  >Department</label
+                >
+                <select
+                  class="form-select"
+                  aria-label="Default select example"
+                  formControlName="surveyDepartment"
+                >
+                  <option
+                    [value]="department.DepartmentId"
+                    *ngFor="let department of departments"
+                  >
+                    {{ department.Name }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-4">
+                <label for="location" class="form-label text-light"
+                  >Survey Type</label
+                >
+                <select
+                  class="form-select"
+                  aria-label="Default select example"
+                  formControlName="surveyType"
+                >
+                  <option value="1">one</option>
+                </select>
+                <!-- select boxes end -->
+              </div>
             </div>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   </div>
