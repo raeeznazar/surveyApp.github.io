@@ -20,6 +20,8 @@ export class UsersComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+
+    // getting datas from local storage
     this.userId = JSON.parse(localStorage.getItem('userData'));
 
     ////reactive form

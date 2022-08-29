@@ -30,6 +30,7 @@
                   class="form-select"
                   aria-label="Default select example"
                   formControlName="surveyLocation"
+                  (change)="onChangeSurveyLocation($event.target.value)"
                 >
                   <option
                     [value]="location.HospitalId"
@@ -47,6 +48,7 @@
                   class="form-select"
                   aria-label="Default select example"
                   formControlName="surveyDepartment"
+                  (change)="onChangeSurveyDepartment($event.target.value)"
                 >
                   <option
                     [value]="department.DepartmentId"
@@ -64,8 +66,11 @@
                   class="form-select"
                   aria-label="Default select example"
                   formControlName="surveyType"
+                  (change)="onChangeSurveyType($event.target.value)"
                 >
-                  <option value="1">one</option>
+                  <option [value]="type.id" *ngFor="let type of types">
+                    {{ type.name }}
+                  </option>
                 </select>
                 <!-- select boxes end -->
               </div>
@@ -90,11 +95,11 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
+          <tr *ngFor="let survey of surveys; let i = index">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>{{ survey.name }}</td>
+            <td>{{ survey.hospital.Name }}</td>
+            <td>{{ survey.department.Name }}</td>
             <!-- <td>
               <div>
                 <button class="btn btn-hover">

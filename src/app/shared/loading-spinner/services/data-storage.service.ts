@@ -48,7 +48,7 @@ export class DataStorageService {
   }
 
   getSurveyType(client_id: any) {
-    const url = environment.SURVEY_TYPE_API + '?clientid' + client_id;
+    const url = environment.SURVEY_TYPE_API + '?clientid=' + client_id;
 
     return this.http.get<any>(url);
   }
@@ -70,6 +70,16 @@ export class DataStorageService {
   getQuestions() {
     const url = environment.QUESTIONS_API;
 
+    return this.http.get<any>(url);
+  }
+
+  getLanguages() {
+    const url = environment.LANGUAGES_API;
+    return this.http.get<any>(url);
+  }
+
+  getRoles(user_id) {
+    const url = environment.ROLES_API + '?status=0' + '&user_id=' + user_id;
     return this.http.get<any>(url);
   }
 }

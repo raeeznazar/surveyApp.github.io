@@ -13,6 +13,7 @@ export class SurveyComponent implements OnInit {
   locations = [];
   departments = [];
   types = [];
+  surveys = [];
 
   userId: any;
   constructor(
@@ -49,26 +50,32 @@ export class SurveyComponent implements OnInit {
             this.departments = resData.results;
 
             this.surveyForm.patchValue({
-              department: this.departments[0].DepartmentId,
+              surveyDepartment: this.departments[0].DepartmentId,
             });
 
             // surveyType
             this.dataStorageService
               .getSurveyType(this.userId.UserData.client_id)
               .subscribe((resData) => {
-                this.types = resData.results;
+                this.types = resData;
                 console.log(this.types);
 
-                this.surveyForm.patchValue({});
+                this.surveyForm.patchValue({
+                  surveyType: this.types[0].id,
+                });
+
+                this.dataStorageService
+                  .getSurvey(
+                    this.surveyForm.controls['surveyLocation'].value,
+                    this.surveyForm.controls['surveyDepartment'].value,
+                    this.surveyForm.controls['surveyType'].value
+                  )
+                  .subscribe((resData) => {
+                    this.surveys = resData.results;
+                  });
               });
           });
       });
-
-    // this.dataStorageService.getSurvey(
-    //   this.surveyForm.controls['surveyLocation'].value,
-    //   this.surveyForm.controls['surveyDepartment'].value
-    // );
-    //   });
   }
 
   // btn to add survey
@@ -79,5 +86,42 @@ export class SurveyComponent implements OnInit {
   // btn for survey setting
   onSurveySettings() {
     this.router.navigate(['sidebar/survey/settings']);
+  }
+
+  // onchange properties
+
+  onChangeSurveyDepartment(changeDepartment: any) {
+    this.dataStorageService
+      .getSurvey(
+        this.surveyForm.controls['surveyLocation'].value,
+        changeDepartment,
+        this.surveyForm.controls['surveyType'].value
+      )
+      .subscribe((resData) => {
+        this.surveys = resData.results;
+      });
+  }
+  onChangeSurveyLocation(changeLocation: any) {
+    this.dataStorageService
+      .getSurvey(
+        changeLocation,
+        this.surveyForm.controls['surveyDepartment'].value,
+        this.surveyForm.controls['surveyType'].value
+      )
+      .subscribe((resData) => {
+        this.surveys = resData.results;
+      });
+  }
+
+  onChangeSurveyType(changeType: any) {
+    this.dataStorageService
+      .getSurvey(
+        this.surveyForm.controls['surveyLocation'].value,
+        this.surveyForm.controls['surveyDepartment'].value,
+        changeType
+      )
+      .subscribe((resData) => {
+        this.surveys = resData.results;
+      });
   }
 }
