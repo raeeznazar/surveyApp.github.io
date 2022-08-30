@@ -82,4 +82,15 @@ export class DataStorageService {
     const url = environment.ROLES_API + '?status=0' + '&user_id=' + user_id;
     return this.http.get<any>(url);
   }
+
+  getLevels(role_id) {
+    const url = environment.LEVELS_API + '?role_id=' + role_id;
+    return this.http.get<any>(url);
+  }
+
+  postLevels( roleIdSelectedFromRoleSelectInput) {
+    const url = environment.LEVELS_API;
+    const body = { roles: [{ role_id: roleIdSelectedFromRoleSelectInput }] };
+    return this.http.post(url, body);
+  }
 }

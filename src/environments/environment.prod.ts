@@ -19,5 +19,8 @@ export const environment = {
 
   //roles API
 
-  ROLES_API : BASE_URL + '/api/v1/roles/'
+  ROLES_API : BASE_URL + '/api/v1/roles/',
+
+  //levels AP1
+  LEVELS_API : BASE_URL + '/api/v1/levels/'
 };

@@ -1,3 +1,4 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { DataStorageService } from 'app/shared/loading-spinner/services/data-storage.service';
@@ -15,6 +16,7 @@ export class CreateUsersComponent implements OnInit {
   languages = [];
   status = [];
   roles = [];
+  levels = [];
   constructor(private dataService: DataStorageService) {}
 
   ngOnInit(): void {
@@ -70,13 +72,45 @@ export class CreateUsersComponent implements OnInit {
     this.dataService
       .getRoles(this.userId.UserData.user_id)
       .subscribe((resData) => {
-        this.roles = resData.results;
-        console.log(this.roles);
+        this.roles = resData;
 
         this.createUserForm.patchValue({
           roles: this.roles[0].role_id,
         });
+
+        this.dataService
+          .getLevels(this.createUserForm.controls['roles'].value)
+          .subscribe((resData) => {
+            this.levels = resData;
+
+            this.createUserForm.patchValue({
+              level: this.levels[0].level_id,
+            });
+          });
       });
+  }
+
+  //When user location is changed
+  onChangeUserLocation(changedUserLocation) {
+    this.dataService
+      .getDepartments(changedUserLocation, this.userId.UserData.user_id)
+      .subscribe((resData) => {
+        this.departments = resData.results;
+        this.createUserForm.patchValue({
+          department: this.departments[0].DepartmentId,
+        });
+      });
+  }
+
+  //when user change roles
+
+  onChangeRoles(changedUserRoles) {
+    this.dataService.postLevels(changedUserRoles).subscribe((resData: any) => {
+    this.levels = resData.Message;
+    this.createUserForm.patchValue({
+      level: this.levels[0].level_id,
+    })
+    });
   }
 
   onCreate() {}
