@@ -14,13 +14,13 @@ export class UsersComponent implements OnInit {
   departments = [];
   users = [];
   userId: any;
+  username = '';
   constructor(
     private router: Router,
     private dataStorageService: DataStorageService
   ) {}
 
   ngOnInit(): void {
-
     // getting datas from local storage
     this.userId = JSON.parse(localStorage.getItem('userData'));
 
@@ -135,5 +135,13 @@ export class UsersComponent implements OnInit {
 
   onCreateUsers() {
     this.router.navigate(['sidebar/users/create']);
+  }
+
+  onEditUsersTable() {}
+
+  onDeleteUsersTable(user_id, username) {
+    
+    this.username = username;
+
   }
 }

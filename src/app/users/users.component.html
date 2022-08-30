@@ -4,6 +4,19 @@
       Users
     </h1>
 
+    <!-- ------------------------------btn-------------------------------- -->
+    <!-- Button trigger modal -->
+    <button
+      type="button"
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#myModal"
+    >
+      Launch demo modal
+    </button>
+
+    <!-- -----------------------------btn/------------------ -->
+
     <div class="offset-md-2 col-md-8">
       <form [formGroup]="usersForm">
         <div class="card" style="background: #2c3d73">
@@ -75,36 +88,71 @@
 
   <!-- users list Table -->
   <div class="row mt-4">
-    <div class="offset-md-2 col-md-8">
-      <div class="card">
-        <div class="card-body">
-          <table class="table table-special">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">User name</th>
-                <th scope="col">User role</th>
-                <th scope="col">Name</th>
-                <th scope="col">Location</th>
-                <th scope="col">Department</th>
-                <th scope="col">Email</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let user of users; let i = index">
-                <th scope="row">{{ i + 1 }}</th>
+    <div class="table-responsive">
+      <table class="table table-special">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">User name</th>
+            <th scope="col">User role</th>
+            <th scope="col">Name</th>
+            <th scope="col">Location</th>
+            <th scope="col">Department</th>
+            <th scope="col">Email</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users; let i = index">
+            <th scope="row">{{ i + 1 }}</th>
 
-                <td>{{ user.username }}</td>
-                <td>{{ user.roles[0].role.name }}</td>
-                <td>{{ user.first_name }}</td>
-                <td>{{ user.hospital.Name }}</td>
-                <td>{{ user.department.Name }}</td>
-                <td>{{ user.email }}</td>
-              </tr>
-            </tbody>
-          </table>
+            <td>{{ user.username }}</td>
+            <td>{{ user.roles[0].role.name }}</td>
+            <td>{{ user.first_name }}</td>
+            <td>{{ user.hospital.Name }}</td>
+            <td>{{ user.department.Name }}</td>
+            <td>{{ user.email }}</td>
+            <td>
+              <button
+                class="btn btn-hover"
+                title="Edit"
+                (click)="onEditUsersTable()"
+              >
+                <span
+                  class="material-symbols-outlined btn-icon"
+                  style="color: #2c3d73"
+                >
+                  edit
+                </span>
+              </button>
+              <button
+                class="btn btn-hover"
+                title="delete"
+                (click)="onDeleteUsersTable(user.user_id, user.username)"
+              >
+                <span
+                  class="material-symbols-outlined btn-icon"
+                  style="color: #2c3d73"
+                >
+                  delete
+                </span>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- -------------------------MODAL START------------------------------ -->
+  <div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title">Heading</h2>
         </div>
       </div>
     </div>
   </div>
+  <!-- ---------------------MODAL ENDS--------------------------- -->
 </div>

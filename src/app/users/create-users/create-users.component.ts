@@ -1,6 +1,6 @@
-import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DataStorageService } from 'app/shared/loading-spinner/services/data-storage.service';
 
 @Component({
@@ -17,7 +17,15 @@ export class CreateUsersComponent implements OnInit {
   status = [];
   roles = [];
   levels = [];
-  constructor(private dataService: DataStorageService) {}
+  errorUserName = '';
+  errorEmail = '';
+  successBox = false;
+  errorBox = false;
+  constructor(
+    private dataService: DataStorageService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.createUserForm = new FormGroup({
@@ -106,12 +114,87 @@ export class CreateUsersComponent implements OnInit {
 
   onChangeRoles(changedUserRoles) {
     this.dataService.postLevels(changedUserRoles).subscribe((resData: any) => {
-    this.levels = resData.Message;
-    this.createUserForm.patchValue({
-      level: this.levels[0].level_id,
-    })
+      this.levels = resData.Message;
+      this.createUserForm.patchValue({
+        level: this.levels[0].level_id,
+      });
     });
   }
 
-  onCreate() {}
+  onCreate() {
+    console.log(this.createUserForm.value);
+
+    const body = {
+      client_id: this.userId.UserData.client_id,
+      username: this.createUserForm.controls['userName'].value,
+      first_name: this.createUserForm.controls['name'].value,
+      user_title: this.createUserForm.controls['userTitle'].value,
+      email: this.createUserForm.controls['email'].value,
+      status: this.createUserForm.controls['status'].value,
+      mobilephone: this.createUserForm.controls['phoneNo'].value,
+      preferredlanguage: this.createUserForm.controls['language'].value,
+      level_id: this.createUserForm.controls['level'].value,
+      hospital: this.createUserForm.controls['location'].value,
+      photo: !this.createUserForm.controls['uploadPhoto'].value
+        ? ''
+        : this.createUserForm.controls['uploadPhoto'].value,
+      department: this.createUserForm.controls['department'].value,
+      roles: [
+        {
+          role_id: this.createUserForm.controls['roles'].value,
+        },
+      ],
+      dailysummary: false,
+      dataupload: false,
+      aim_signature: '',
+      monthlyreport: false,
+      is_ad_user: false,
+      doctorplus: false,
+      doctorminus: false,
+      nurse: false,
+      app: false,
+      resident: false,
+      yearlyreport: false,
+      fyreport: false,
+      quarterlyreport: false,
+      otp_type: 1,
+      threedayrevisit: false,
+      physician_compliments_report: false,
+      nurse_compliments_report: false,
+      app_compliments_report: false,
+      resident_compliments_report: false,
+      technician_compliments_report: false,
+      mail: false,
+    };
+    this.errorBox = false;
+    this.successBox = false;
+    this.dataService.postUsers(body).subscribe((resData: any) => {
+      if (resData.Status == 0) {
+        this.successBox = true;
+
+        this.createUserForm.reset();
+      } else {
+        this.errorBox = true;
+
+        for (let key in resData.Message) {
+          switch (key) {
+            case 'email':
+              this.errorEmail = resData.Message[key][0];
+              this.errorUserName = '';
+              break;
+
+            case 'username':
+              this.errorUserName = resData.Message[key][0];
+              this.errorEmail = '';
+              break;
+          }
+        }
+      }
+    });
+  }
+
+  //back btn
+  onBackToUsers() {
+    this.router.navigate(['sidebar/users']);
+  }
 }
