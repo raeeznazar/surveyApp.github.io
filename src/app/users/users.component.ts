@@ -3,12 +3,16 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataStorageService } from 'app/shared/loading-spinner/services/data-storage.service';
 
+// declare var window: any;
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css'],
 })
 export class UsersComponent implements OnInit {
+  //modal
+  // formModal: any;
+  showModal: boolean = false;
   usersForm: FormGroup;
   locations = [];
   departments = [];
@@ -69,6 +73,10 @@ export class UsersComponent implements OnInit {
               });
           });
       });
+
+    // this.formModal = new window.bootstrap.Modal(
+    //   document.getElementById('myModals')
+    // );
   }
 
   // onChanges CALL
@@ -140,8 +148,15 @@ export class UsersComponent implements OnInit {
   onEditUsersTable() {}
 
   onDeleteUsersTable(user_id, username) {
-    
     this.username = username;
-
   }
+
+  // // modal
+  // openModel(): void {
+  //   this.formModal.show();
+  // }
+
+  // closeModal(): void {
+  //   this.formModal.hide();
+  // }
 }

@@ -7,3 +7,10 @@
 .btn-modify:hover {
   color: rgb(227, 10, 86);
 }
+
+.show {
+  display: block;
+}
+.modal {
+  z-index: 1060 !important;
+}
