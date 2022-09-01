@@ -14,15 +14,16 @@ export const environment = {
   //questions API
   QUESTIONS_API: BASE_URL + '/api/v1/questions/',
 
+  //Delete question API
+  QUESTIONS_DELETE_API: BASE_URL + '/api/v1/questions/',
+
   //languages AP1
-  LANGUAGES_API : BASE_URL + '/api/v1/languages/',
+  LANGUAGES_API: BASE_URL + '/api/v1/languages/',
 
   //roles API
 
-  ROLES_API : BASE_URL + '/api/v1/roles/',
+  ROLES_API: BASE_URL + '/api/v1/roles/',
 
   //levels AP1
-  LEVELS_API : BASE_URL + '/api/v1/levels/'
-
-
+  LEVELS_API: BASE_URL + '/api/v1/levels/',
 };

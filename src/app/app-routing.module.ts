@@ -21,7 +21,8 @@ const routes: Routes = [
 
   {
     path: 'sidebar',
-    component: SidebarComponent, canActivate:[AuthGuard],
+    component: SidebarComponent,
+    canActivate: [AuthGuard],
     children: [
       { path: 'dashboard', component: DashBoardComponent },
       { path: 'questions', component: QuestionsComponent },
@@ -33,6 +34,10 @@ const routes: Routes = [
       { path: 'survey/settings', component: SurveyQuestionsSettingsComponent },
       { path: 'users', component: UsersComponent },
       { path: 'users/create', component: CreateUsersComponent },
+      {
+        path: 'users/create/:hId/:dId/:userId',
+        component: CreateUsersComponent,
+      },
     ],
   },
 ];

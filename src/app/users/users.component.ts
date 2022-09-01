@@ -19,6 +19,7 @@ export class UsersComponent implements OnInit {
   users = [];
   userId: any;
   username = '';
+  delUser_id = '';
   constructor(
     private router: Router,
     private dataStorageService: DataStorageService
@@ -117,7 +118,7 @@ export class UsersComponent implements OnInit {
         this.usersForm.controls['status'].value
       )
       .subscribe((resData) => {
-        console.log(resData);
+        // console.log(resData);
 
         this.users = resData;
       });
@@ -135,28 +136,59 @@ export class UsersComponent implements OnInit {
         statusChangeValue.value
       )
       .subscribe((resData) => {
-        console.log(resData);
+        // console.log(resData);
 
         this.users = resData;
       });
   }
 
+  // this navigate to create user page
   onCreateUsers() {
     this.router.navigate(['sidebar/users/create']);
   }
 
-  onEditUsersTable() {}
-
-  onDeleteUsersTable(user_id, username) {
+  //delete icon on page
+  onDeleteUser(username, userId) {
     this.username = username;
+
+    this.delUser_id = userId;
+    this.showModal = true;
   }
 
-  // // modal
-  // openModel(): void {
-  //   this.formModal.show();
-  // }
+  // delete btn in modal
+  onDelete() {
+    this.dataStorageService
+      .deleteUsers(this.delUser_id)
+      .subscribe((resData: any) => {
+        // this.users = resData;
+        if (resData.Status == 0) {
+          this.showModal = false;
 
-  // closeModal(): void {
-  //   this.formModal.hide();
-  // }
+          // API of get user
+          this.dataStorageService
+            .getUsers(
+              this.userId.UserData.user_id,
+              this.userId.UserData.client_id,
+              this.usersForm.controls['location'].value,
+              this.usersForm.controls['department'].value,
+              this.usersForm.controls['status'].value
+            )
+            .subscribe((resData) => {
+              // console.log(resData);
+              this.users = resData;
+            });
+        }
+      });
+  }
+
+  onEditUsersTable(userId) {
+    this.router.navigate([
+      'sidebar/users/create/' +
+        this.usersForm.controls['location'].value +
+        '/' +
+        this.usersForm.controls['department'].value +
+        '/' +
+        userId,
+    ]);
+  }
 }

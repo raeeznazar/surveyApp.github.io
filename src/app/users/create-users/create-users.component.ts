@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { DataStorageService } from 'app/shared/loading-spinner/services/data-storage.service';
 
 @Component({
@@ -19,8 +19,13 @@ export class CreateUsersComponent implements OnInit {
   levels = [];
   errorUserName = '';
   errorEmail = '';
+  errorMessage = '';
   successBox = false;
   errorBox = false;
+  paramId: any = '';
+  paramhId: any = '';
+  paramdId: any = '';
+
   constructor(
     private dataService: DataStorageService,
     private router: Router,
@@ -44,58 +49,135 @@ export class CreateUsersComponent implements OnInit {
     });
 
     //getting datas from local storage
-
     this.userId = JSON.parse(localStorage.getItem('userData'));
 
-    // location drop down
-    this.dataService
-      .getLocations(this.userId.UserData.user_id)
-      .subscribe((resData) => {
-        this.locations = resData.results;
-        this.createUserForm.patchValue({
-          location: this.locations[0].HospitalId,
+    // edit
+
+    this.route.params.subscribe((params: Params) => {
+      this.paramhId = +params['hId'];
+      this.paramdId = +params['dId'];
+      this.paramId = +params['userId'];
+      console.log(this.paramId);
+      console.log(params);
+      if (this.paramhId) {
+        this.dataService
+          .getUserById(this.paramId)
+          .subscribe((userResponse: any) => {
+            console.log(userResponse);
+
+            this.createUserForm.patchValue({
+              userName: userResponse.username,
+              name: userResponse.first_name,
+              email: userResponse.email,
+              userTitle: userResponse.user_title,
+              phoneNo: userResponse.first_name,
+              status: userResponse.status,
+            });
+
+            this.dataService
+              .getLocations(this.userId.UserData.user_id)
+              .subscribe((resData) => {
+                this.locations = resData.results;
+                console.log(userResponse.hospital);
+                this.createUserForm.patchValue({
+                  location: userResponse.hospital.HospitalId,
+                });
+
+                // department drop down
+                this.dataService
+                  .getDepartments(
+                    this.createUserForm.controls['location'].value,
+                    this.userId.UserData.user_id
+                  )
+                  .subscribe((resData) => {
+                    this.departments = resData.results;
+                    this.createUserForm.patchValue({
+                      department: userResponse.department.DepartmentId,
+                    });
+                  });
+              });
+
+            this.dataService.getLanguages().subscribe((resData) => {
+              this.languages = resData.results;
+              this.createUserForm.patchValue({
+                language: userResponse.language.language_id,
+              });
+            });
+
+            this.dataService
+              .getRoles(this.userId.UserData.user_id)
+              .subscribe((resData) => {
+                this.roles = resData;
+
+                this.createUserForm.patchValue({
+                  roles: userResponse.roles[0].role.role_id,
+                });
+
+                this.dataService
+                  .getLevels(this.createUserForm.controls['roles'].value)
+                  .subscribe((resData) => {
+                    this.levels = resData;
+
+                    this.createUserForm.patchValue({
+                      level: userResponse.level.level_id,
+                    });
+                  });
+              });
+          });
+      } else {
+        // location drop down
+        this.dataService
+          .getLocations(this.userId.UserData.user_id)
+          .subscribe((resData) => {
+            this.locations = resData.results;
+            this.createUserForm.patchValue({
+              location: this.locations[0].HospitalId,
+            });
+
+            // department drop down
+            this.dataService
+              .getDepartments(
+                this.createUserForm.controls['location'].value,
+                this.userId.UserData.user_id
+              )
+              .subscribe((resData) => {
+                this.departments = resData.results;
+                this.createUserForm.patchValue({
+                  department: this.departments[0].DepartmentId,
+                });
+              });
+          });
+
+        this.dataService.getLanguages().subscribe((resData) => {
+          this.languages = resData.results;
+          this.createUserForm.patchValue({
+            language: this.languages[0].language_id,
+          });
         });
 
-        // department drop down
         this.dataService
-          .getDepartments(
-            this.createUserForm.controls['location'].value,
-            this.userId.UserData.user_id
-          )
+          .getRoles(this.userId.UserData.user_id)
           .subscribe((resData) => {
-            this.departments = resData.results;
-            this.createUserForm.patchValue({
-              department: this.departments[0].DepartmentId,
-            });
-          });
-      });
+            this.roles = resData;
 
-    this.dataService.getLanguages().subscribe((resData) => {
-      this.languages = resData.results;
-      this.createUserForm.patchValue({
-        language: this.languages[0].language_id,
-      });
+            this.createUserForm.patchValue({
+              roles: this.roles[0].role_id,
+            });
+
+            this.dataService
+              .getLevels(this.createUserForm.controls['roles'].value)
+              .subscribe((resData) => {
+                this.levels = resData;
+
+                this.createUserForm.patchValue({
+                  level: this.levels[0].level_id,
+                });
+              });
+          });
+      }
     });
 
-    this.dataService
-      .getRoles(this.userId.UserData.user_id)
-      .subscribe((resData) => {
-        this.roles = resData;
-
-        this.createUserForm.patchValue({
-          roles: this.roles[0].role_id,
-        });
-
-        this.dataService
-          .getLevels(this.createUserForm.controls['roles'].value)
-          .subscribe((resData) => {
-            this.levels = resData;
-
-            this.createUserForm.patchValue({
-              level: this.levels[0].level_id,
-            });
-          });
-      });
+    //end of ngOnInit
   }
 
   //When user location is changed
@@ -134,7 +216,7 @@ export class CreateUsersComponent implements OnInit {
       mobilephone: this.createUserForm.controls['phoneNo'].value,
       preferredlanguage: this.createUserForm.controls['language'].value,
       level_id: this.createUserForm.controls['level'].value,
-      hospital: this.createUserForm.controls['location'].value,
+      hospital: +this.createUserForm.controls['location'].value,
       photo: !this.createUserForm.controls['uploadPhoto'].value
         ? ''
         : this.createUserForm.controls['uploadPhoto'].value,
@@ -168,29 +250,45 @@ export class CreateUsersComponent implements OnInit {
     };
     this.errorBox = false;
     this.successBox = false;
-    this.dataService.postUsers(body).subscribe((resData: any) => {
-      if (resData.Status == 0) {
-        this.successBox = true;
+    if (this.paramId) {
+      this.dataService
+        .editUsers(body, this.paramId)
+        .subscribe((resData: any) => {
+          if (resData.Status == 0) {
+            this.successBox = true;
+            console.log(resData);
+          } else {
+            this.errorBox = true;
+            this.errorMessage = 'An error occured';
+          }
+        });
+    } else {
+      this.dataService.postUsers(body).subscribe((resData: any) => {
+        if (resData.Status == 0) {
+          this.successBox = true;
 
-        this.createUserForm.reset();
-      } else {
-        this.errorBox = true;
+          setTimeout(() => this.router.navigate(['sidebar/users']), 2000);
 
-        for (let key in resData.Message) {
-          switch (key) {
-            case 'email':
-              this.errorEmail = resData.Message[key][0];
-              this.errorUserName = '';
-              break;
+          this.createUserForm.reset();
+        } else {
+          this.errorBox = true;
 
-            case 'username':
-              this.errorUserName = resData.Message[key][0];
-              this.errorEmail = '';
-              break;
+          for (let key in resData.Message) {
+            switch (key) {
+              case 'email':
+                this.errorEmail = resData.Message[key][0];
+                this.errorUserName = '';
+                break;
+
+              case 'username':
+                this.errorUserName = resData.Message[key][0];
+                this.errorEmail = '';
+                break;
+            }
           }
         }
-      }
-    });
+      });
+    }
   }
 
   //back btn

@@ -100,8 +100,35 @@ export class DataStorageService {
     return this.http.post(url, body);
   }
 
+  editUsers(body, userId) {
+    const url = environment.USERS_API + userId + '/';
+
+    return this.http.put(url, body);
+  }
+
   deleteUsers(user_id) {
     const url = environment.USERS_API + user_id + '/';
+    return this.http.delete(url);
+  }
+
+  getUserById(user_id) {
+    const url = environment.USERS_API + user_id + '/';
+    return this.http.get(url);
+  }
+  postQuestions(body) {
+    const url = environment.QUESTIONS_API;
+    return this.http.post(url, body);
+  }
+  editQuestion(questionid, body) {
+    const url =
+      environment.QUESTIONS_API +
+      questionid +
+      '/?initial_copy_flag=1&secondary_copy_flag=1';
+    return this.http.put(url, body);
+  }
+
+  deleteQuestion(questionid) {
+    const url = environment.QUESTIONS_DELETE_API + questionid + '/';
     return this.http.delete(url);
   }
 }

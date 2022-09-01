@@ -3,6 +3,19 @@
     <h1 class="display-2 text-center fw-normal" style="color: #031059">
       Add Questions
     </h1>
+
+    <div
+      class="alert alert-primary text-center"
+      role="alert"
+      *ngIf="successBox"
+    >
+      {{ message }}
+    </div>
+
+    <div class="alert alert-danger text-center" role="alert" *ngIf="errorBox">
+      {{ message }}
+    </div>
+
     <!-- -----------------Reactive form starts----------------- -->
     <form [formGroup]="submitForm" #ngForm="ngForm" (ngSubmit)="onSubmit()">
       <div class="row">
@@ -140,10 +153,11 @@
             Save
           </button>
           <button
+            type="button"
             class="btn m-2 mt-4"
             style="background: #2c3d73; color: white"
           >
-            Cancel
+            Back
           </button>
         </div>
       </div>
