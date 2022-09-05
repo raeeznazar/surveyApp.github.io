@@ -17,27 +17,32 @@
 
   <div class="row mt-5">
     <div class="col-xs-12 col-md-8 offset-md-2">
-      <table class="table">
-        <thead style="background: #2c3d73; color: white">
-          <tr>
-            <th scope="col">#</th>
+      <div class="table-responsive-sm">
+        <table class="table">
+          <thead style="background: #2c3d73; color: white">
+            <tr>
+              <th scope="col">#</th>
 
-            <th scope="col">Assigned survey</th>
-            <th scope="col">Question type</th>
-            <th scope="col">Question</th>
+              <th scope="col">Assigned survey</th>
+              <th scope="col">Question type</th>
+              <th scope="col">Question</th>
 
-            <th scope="col">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let question of questions; let i = index">
-            <th scope="row">{{ i + 1 }}</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let question of questions; let i = index">
+              <th scope="row">{{ i + 1 }}</th>
 
-            <td>{{ question.questions.question_name }}</td>
-            <td>{{ question.questiontype.description }}</td>
-            <td>{{ question.description }}</td>
-            <td>
-              <button class="btn" title=" edit">
+              <td>{{ question.questions.question_name }}</td>
+              <td>{{ question.questiontype.description }}</td>
+              <td>{{ question.description }}</td>
+              <td>
+                <!-- <button
+                class="btn btn-sm"
+                title=" edit"
+                (click)="onEditQuestion(question.questionid)"
+              >
                 <span
                   class="material-symbols-outlined btn-icon"
                   style="color: #2c3d73"
@@ -46,7 +51,7 @@
                 </span>
               </button>
               <button
-                class="btn"
+                class="btn btn-sm"
                 title=" delete"
                 (click)="onDelete(question.questionid)"
                 data-toggle="modal"
@@ -58,11 +63,41 @@
                 >
                   delete
                 </span>
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+              </button> -->
+
+                <div class="btn-group">
+                  <button
+                    class="btn btn-sm"
+                    title="edit"
+                    (click)="onEditQuestion(question.questionid)"
+                  >
+                    <span
+                      class="material-symbols-outlined btn-icon"
+                      style="color: #2c3d73"
+                    >
+                      edit
+                    </span>
+                  </button>
+                  <button
+                    class="btn btn-sm"
+                    title=" delete"
+                    (click)="onDelete(question.questionid)"
+                    data-toggle="modal"
+                    data-target="#myModal"
+                  >
+                    <span
+                      class="material-symbols-outlined btn-icon"
+                      style="color: #2c3d73"
+                    >
+                      delete
+                    </span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 

@@ -1,0 +1,19 @@
+.bgCoustom {
+  background: #031059;
+  color: white;
+}
+input[type="radio"] {
+  border: 1px solid #031059;
+  padding: 0.5em;
+  -webkit-appearance: none;
+}
+
+input[type="radio"]:checked {
+  background: #031059;
+
+  background-size: 9px 9px;
+}
+
+input[type="radio"]:focus {
+  outline-color: transparent;
+}

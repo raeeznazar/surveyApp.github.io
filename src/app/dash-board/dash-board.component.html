@@ -3,7 +3,9 @@
     <h1 class="display-2 text-center fw-normal" style="color: #031059">
       Dash Board
     </h1>
-    <h4 class="text-center text-danger">Time & date</h4>
+    <h4 class="text-center text-danger">
+      DATE : {{ loginDate | date: "dd/MM/yyyy" }}
+    </h4>
   </div>
   <!-- -------------------------------bootstrap Cards--------------------------------  -->
   <div class="row row-cols-1 row-cols-md-3 g-4">
@@ -12,33 +14,35 @@
         class="card h-100"
         style="border: 1px solid #4e4e7a; border-radius: 6px"
       >
-        <div class="card-body">
+        <div class="card-body btn" (click)="gotToQuestions()">
           <h3 class="card-title text-center" style="color: #4e4e7a">
             Questions
           </h3>
-          <p class="card-text text-center">Question Count</p>
+          <p class="card-text text-center">({{ questions }})</p>
         </div>
       </div>
     </div>
     <div class="col">
       <div
-        class="card h-100"
+        class="card h-100 btn"
+        (click)="goToSurvey()"
         style="border: 1px solid #4e4e7a; border-radius: 6px"
       >
         <div class="card-body">
           <h3 class="card-title text-center" style="color: #4e4e7a">Surveys</h3>
-          <p class="card-text text-center">Surveys Count</p>
+          <p class="card-text text-center">({{ surveyCount }})</p>
         </div>
       </div>
     </div>
     <div class="col">
       <div
-        class="card h-100"
+        class="card h-100 btn"
+        (click)="goToUsers()"
         style="border: 1px solid #4e4e7a; border-radius: 6px"
       >
         <div class="card-body">
           <h3 class="card-title text-center" style="color: #4e4e7a">Users</h3>
-          <p class="card-text text-center">Users Count</p>
+          <p class="card-text text-center">({{ usersCount }})</p>
         </div>
       </div>
     </div>

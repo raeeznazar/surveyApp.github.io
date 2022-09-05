@@ -11,7 +11,11 @@
 
   <div style="text-align: right; width: 100%">
     <span style="float: left"></span>
-    <button class="btn btn-small mx-2 btn-style"   title="Logout!"  (click)="onLogout()"    >
+    <button
+      class="btn btn-small mx-2 btn-style"
+      title="Logout!"
+      (click)="onLogout()"
+    >
       <span class="material-symbols-outlined"> logout </span>
     </button>
   </div>
@@ -26,7 +30,12 @@
     mode="side"
     opened
   >
-    <button mat-button class="menu-button">
+    <button
+      mat-button
+      class="menu-button"
+      routerLinkActive="active"
+      routerLink="dashboard"
+    >
       <mat-icon>home</mat-icon>
       <span>Home</span>
     </button>

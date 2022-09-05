@@ -100,6 +100,17 @@
               style="border: 1px solid #2c3d73"
             />
           </div>
+          <div class="col-md-3" [hidden]="true">
+            <label for="order" class="form-label">Id</label>
+            <input
+              type="text"
+              name=""
+              id=""
+              formControlName="optionId"
+              class="form-control"
+              style="border: 1px solid #2c3d73"
+            />
+          </div>
           <div class="col-md-3">
             <label for="order" class="form-label">options</label>
             <input
@@ -154,6 +165,7 @@
           </button>
           <button
             type="button"
+            (click)="back()"
             class="btn m-2 mt-4"
             style="background: #2c3d73; color: white"
           >

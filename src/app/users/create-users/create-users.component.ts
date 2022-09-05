@@ -26,6 +26,7 @@ export class CreateUsersComponent implements OnInit {
   paramhId: any = '';
   paramdId: any = '';
 
+
   constructor(
     private dataService: DataStorageService,
     private router: Router,
@@ -176,6 +177,8 @@ export class CreateUsersComponent implements OnInit {
           });
       }
     });
+
+    
 
     //end of ngOnInit
   }

@@ -11,6 +11,8 @@ export const environment = {
   SURVEYS_API: BASE_URL + '/api/v1/surveydefinitions/',
   SURVEY_TYPE_API: BASE_URL + '/api/v1/surveytype/',
 
+  SURVEY_QUESTIONS_API: BASE_URL + '/api/v1/surveyquestions/',
+
   //questions API
   QUESTIONS_API: BASE_URL + '/api/v1/questions/',
 
@@ -26,4 +28,14 @@ export const environment = {
 
   //levels AP1
   LEVELS_API: BASE_URL + '/api/v1/levels/',
+
+  //ageSurvey
+
+  AGE_API: BASE_URL + '/api/v1/agegroups/',
+
+  //take survey Questions
+
+  TAKE_SURVEY_QUESTIONS_API: BASE_URL + '/api/v1/surveys/',
+  // posting servey
+  SURVEY_REPLAY_POST : BASE_URL + '/api/v1/surveyreply/',
 };

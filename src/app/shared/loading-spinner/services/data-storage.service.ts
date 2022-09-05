@@ -119,6 +119,7 @@ export class DataStorageService {
     const url = environment.QUESTIONS_API;
     return this.http.post(url, body);
   }
+
   editQuestion(questionid, body) {
     const url =
       environment.QUESTIONS_API +
@@ -130,5 +131,69 @@ export class DataStorageService {
   deleteQuestion(questionid) {
     const url = environment.QUESTIONS_DELETE_API + questionid + '/';
     return this.http.delete(url);
+  }
+
+  getQuestionsById(questionid) {
+    const url = environment.QUESTIONS_DELETE_API + questionid + '/';
+    return this.http.get(url);
+  }
+
+  getCloneForm() {
+    const url = environment.SURVEYS_API + '?page_size=200';
+    return this.http.get(url);
+  }
+
+  getAge() {
+    const url = environment.AGE_API;
+    return this.http.get(url);
+  }
+
+  postSurvey(body: any, cloneFromId) {
+    let templateid = cloneFromId == 0 ? '' : cloneFromId;
+    const url = environment.SURVEYS_API + '?templateid=' + templateid;
+    return this.http.post(url, body);
+  }
+  deleteSurvey(surveyDefinitionId: any) {
+    const url = environment.SURVEYS_API + surveyDefinitionId + '/';
+    return this.http.delete(url);
+  }
+
+  getSurveyById(surveyDefinitionId) {
+    const url = environment.SURVEYS_API + surveyDefinitionId + '/';
+    return this.http.get(url);
+  }
+  putServey(body, surveyDefinitionId) {
+    const url = environment.SURVEYS_API + surveyDefinitionId + '/';
+    return this.http.put(url, body);
+  }
+
+  // getSurveyQuestion(surveydefinitionid){
+  //   const url =  environment.QUESTIONS_API + surveydefinitionid + '/';
+  //   return this.http.get(url);
+  // }
+  getSurveyQuestions(surveyDefinitionId) {
+    const url =
+      environment.SURVEY_QUESTIONS_API +
+      '?surveydefinitionid=' +
+      surveyDefinitionId;
+    return this.http.get(url);
+  }
+
+  // Function to save survey questions in survey settings
+  saveSurveyQuestions(body) {
+    const url = environment.SURVEY_QUESTIONS_API;
+    return this.http.post(url, body);
+  }
+
+  //take survey
+
+  getTakeSurveyQuestion(token) {
+    const url = environment.TAKE_SURVEY_QUESTIONS_API + '?token=' + token;
+    return this.http.get(url);
+  }
+
+  postSurveDetails(body, token) {
+    const url = environment.SURVEY_REPLAY_POST + '?token=' + token;
+    return this.http.post(url, body);
   }
 }

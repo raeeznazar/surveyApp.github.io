@@ -1,16 +1,16 @@
-
-
 @media only screen and (max-width: 600px) {
-  .btn-icon{
-    font-variation-settings:
-    'FILL' 0,
-    'wght' 300,
-    'GRAD' 0,
-    'opsz' 20
+  .btn-icon {
+    font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 20;
   }
 }
 
+.btn-modify:hover {
+  color: rgb(227, 10, 86);
+}
 
-
-
-
+.show {
+  display: block;
+}
+.modal {
+  z-index: 1060 !important;
+}

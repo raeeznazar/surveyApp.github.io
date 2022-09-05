@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -17,9 +17,10 @@ import { UsersModule } from './users/users.module';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
+import { TakeSurveyComponent } from './take-survey/take-survey.component';
 
 @NgModule({
-  declarations: [AppComponent, DashBoardComponent],
+  declarations: [AppComponent, DashBoardComponent, TakeSurveyComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -29,6 +30,7 @@ import { AuthInterceptorService } from './auth/auth-interceptor.service';
     questionModule,
     Surveymodule,
     UsersModule,
+    FormsModule,
     HttpClientModule,
   ],
   providers: [

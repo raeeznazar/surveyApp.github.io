@@ -22,6 +22,8 @@ export class QuestionsComponent implements OnInit {
       console.log(this.questions);
 
       this.questions = resData;
+
+    //Array question
       for (var i = 0; i < this.questions.length; i++) {
         var question_name = '';
         for (var j = 0; j < this.questions[i].surveyquestion.length; j++) {
@@ -50,6 +52,11 @@ export class QuestionsComponent implements OnInit {
     console.log(this.questionId);
 
     this.showModal = true;
+  }
+
+  //navigation to edit question page
+  onEditQuestion(questionId) {
+    this.router.navigate(['sidebar/question/create/' + questionId]);
   }
 
   onDeleteQestion() {

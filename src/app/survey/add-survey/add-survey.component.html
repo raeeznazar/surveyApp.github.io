@@ -1,5 +1,6 @@
 <div class="container-fluid pb-4">
   <!-- create survey selection btn -->
+
   <div class="row">
     <h1 class="display-2 text-center fw-normal" style="color: #031059">
       Add survey
@@ -54,7 +55,18 @@
       </div>
     </div>
   </div>
-
+  <div class="row">
+    <div
+      class="alert alert-primary text-center"
+      role="alert"
+      *ngIf="successBox"
+    >
+      {{ statusMessage }}
+    </div>
+    <div class="alert alert-danger text-center" role="alert" *ngIf="errorBox">
+      {{ statusMessage }}
+    </div>
+  </div>
   <!-- create survey selection btn end -->
 
   <form [formGroup]="surveyForm" (ngSubmit)="onSave()">
@@ -69,39 +81,59 @@
               <div class="row">
                 <div class="col-md-4">
                   <label for="clonefrom" class="form-label">Clone form</label>
-                  <input
+                  <!-- <input
                     formControlName="cloneForm"
                     type="text"
                     class="form-control"
                     style="border: 1px solid #2c3d73"
-                  />
+                  /> -->
+                  <select
+                    formControlName="cloneForm"
+                    class="form-select form-select-sm"
+                    aria-label="Default select example"
+                    style="border: 1px solid #2c3d73"
+                    (change)="onCloneFromChanged($event.target.value)"
+                  >
+                    <option value="0" [disabled]>Select template</option>
+                    <option
+                      [value]="cloneForm.surveydefinitionid"
+                      *ngFor="let cloneForm of cloneForms"
+                    >
+                      {{ cloneForm.name }}
+                    </option>
+                  </select>
                 </div>
                 <div class="col-md-4">
                   <label for="Location" class="form-label">Location</label>
                   <select
                     formControlName="location"
-                    class="form-select"
+                    class="form-select form-select-sm"
                     aria-label="Default select example"
                     style="border: 1px solid #2c3d73"
+                    (change)="onChangeSurveyLocation($event.target.value)"
                   >
-                    <option selected disabled>Select location</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <option
+                      [value]="location.HospitalId"
+                      *ngFor="let location of locations"
+                    >
+                      {{ location.Name }}
+                    </option>
                   </select>
                 </div>
                 <div class="col-md-4">
                   <label for="Department" class="form-label">Department</label>
                   <select
                     formControlName="department"
-                    class="form-select"
+                    class="form-select form-select-sm"
                     aria-label="Default select example"
                     style="border: 1px solid #2c3d73"
                   >
-                    <option selected disabled>Select department</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <option
+                      [value]="department.DepartmentId"
+                      *ngFor="let department of departments"
+                    >
+                      {{ department.Name }}
+                    </option>
                   </select>
                 </div>
               </div>
@@ -129,10 +161,9 @@
                     aria-label="Default select example"
                     style="border: 1px solid #2c3d73"
                   >
-                    <option selected disabled>Age group</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <option [value]="age.agegroupid" *ngFor="let age of ages">
+                      {{ age.agegroup }}
+                    </option>
                   </select>
                 </div>
                 <div class="col-md-4">
@@ -143,10 +174,12 @@
                     aria-label="Default select example"
                     style="border: 1px solid #2c3d73"
                   >
-                    <option selected disabled>Language</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <option
+                      [value]="language.language_id"
+                      *ngFor="let language of languages"
+                    >
+                      {{ language.name }}
+                    </option>
                   </select>
                 </div>
               </div>
@@ -165,10 +198,9 @@
                     aria-label="Default select example"
                     style="border: 1px solid #2c3d73"
                   >
-                    <option selected disabled>Age group</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <option [value]="types.id" *ngFor="let types of surveyType">
+                      {{ types.name }}
+                    </option>
                   </select>
                 </div>
                 <div class="col-md-4">
@@ -288,10 +320,10 @@
                 </div>
                 <div class="col-md-6">
                   <label for="Thank-you-editor" class="form-label"
-                    >Thank you editor
+                    >Thank you Header
                   </label>
                   <textarea
-                    formControlName="thankYouEditor"
+                    formControlName="thankYouHeader"
                     class="form-control"
                     name=""
                     id=""
@@ -447,14 +479,20 @@
         <div class="row text-center">
           <div>
             <button
+              class="btn"
+              style="background: #2c3d73; color: white"
+              type="button"
+              (click)="backToSurveys()"
+            >
+              Back
+            </button>
+            <button
               class="btn mx-2"
               type="submit"
+              *ngIf="submitBtn"
               style="background: #2c3d73; color: white"
             >
-              Save
-            </button>
-            <button class="btn" style="background: #2c3d73; color: white">
-              Cancel
+              Submit
             </button>
           </div>
         </div>

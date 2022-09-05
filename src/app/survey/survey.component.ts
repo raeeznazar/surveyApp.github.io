@@ -9,6 +9,7 @@ import { DataStorageService } from 'app/shared/loading-spinner/services/data-sto
   styleUrls: ['./survey.component.css'],
 })
 export class SurveyComponent implements OnInit {
+  showModal: boolean = false;
   surveyForm: FormGroup;
   locations = [];
   departments = [];
@@ -16,6 +17,7 @@ export class SurveyComponent implements OnInit {
   surveys = [];
 
   userId: any;
+  surveyDefinitionId: any;
   constructor(
     private router: Router,
     private dataStorageService: DataStorageService
@@ -84,8 +86,10 @@ export class SurveyComponent implements OnInit {
   }
 
   // btn for survey setting
-  onSurveySettings() {
-    this.router.navigate(['sidebar/survey/settings']);
+  onSurveySettings(surveydefinitionid) {
+    // console.log(surveydefinitionid);
+
+    this.router.navigate(['sidebar/survey/settings/' + surveydefinitionid]);
   }
 
   // onchange properties
@@ -103,13 +107,22 @@ export class SurveyComponent implements OnInit {
   }
   onChangeSurveyLocation(changeLocation: any) {
     this.dataStorageService
-      .getSurvey(
-        changeLocation,
-        this.surveyForm.controls['surveyDepartment'].value,
-        this.surveyForm.controls['surveyType'].value
-      )
-      .subscribe((resData) => {
-        this.surveys = resData.results;
+      .getDepartments(changeLocation, this.userId.UserData.user_id)
+      .subscribe((resData: any) => {
+        this.departments = resData.results;
+
+        this.surveyForm.patchValue({
+          surveyDepartment: this.departments[0].DepartmentId,
+        });
+        this.dataStorageService
+          .getSurvey(
+            changeLocation,
+            this.surveyForm.controls['surveyDepartment'].value,
+            this.surveyForm.controls['surveyType'].value
+          )
+          .subscribe((resData) => {
+            this.surveys = resData.results;
+          });
       });
   }
 
@@ -123,5 +136,43 @@ export class SurveyComponent implements OnInit {
       .subscribe((resData) => {
         this.surveys = resData.results;
       });
+  }
+
+  onDelete(surveydefinitionid) {
+    this.showModal = true;
+    this.surveyDefinitionId = surveydefinitionid;
+  }
+
+  onDeleteSurvey() {
+    this.dataStorageService
+      .deleteSurvey(this.surveyDefinitionId)
+      .subscribe((resData: any) => {
+        // this.users = resData;
+        if (resData.Status == 0) {
+          this.showModal = false;
+
+          // API of get user
+          this.dataStorageService;
+          this.dataStorageService
+            .getSurvey(
+              this.surveyForm.controls['surveyLocation'].value,
+              this.surveyForm.controls['surveyDepartment'].value,
+              this.surveyForm.controls['surveyType'].value
+            )
+            .subscribe((resData) => {
+              this.surveys = resData.results;
+            });
+        } else {
+          console.log('An error occured');
+          alert('An error occured');
+          this.showModal = false;
+        }
+      });
+  }
+
+  onEditSurvey(surveydefinitionid) {
+    console.log(surveydefinitionid);
+
+    this.router.navigate(['sidebar/survey/edit/' + surveydefinitionid]);
   }
 }
