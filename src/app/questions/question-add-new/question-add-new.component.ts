@@ -15,6 +15,8 @@ export class QuestionAddNewComponent implements OnInit {
   message = '';
   paramqId: any = '';
   submitForm: FormGroup;
+  hideFormArray = true;
+
   constructor(
     private dataStorageService: DataStorageService,
     private router: Router,
@@ -22,6 +24,7 @@ export class QuestionAddNewComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    //Reactive form for questions
     this.submitForm = new FormGroup({
       questionType: new FormControl(1, [Validators.required]),
       questionDescription: new FormControl(null, [Validators.required]),
@@ -31,6 +34,7 @@ export class QuestionAddNewComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       this.paramqId = +params['qId'];
 
+      //API calling for populate questions during editing
       if (this.paramqId) {
         this.dataStorageService
           .getQuestionsById(this.paramqId)
@@ -42,7 +46,7 @@ export class QuestionAddNewComponent implements OnInit {
               questionDescription: questionResponse.description,
             });
 
-            // patching values to Array
+            // Adding values to Array
             for (let option of questionResponse.question_option) {
               this.onAddQuestionForEdit(
                 option.orderid,
@@ -127,7 +131,7 @@ export class QuestionAddNewComponent implements OnInit {
       });
     }
   }
-  // finction to add form arrays
+  // function to add form arrays
   onAddQuestions() {
     (<FormArray>this.submitForm.get('addQuestionsArray')).push(
       new FormGroup({

@@ -16,6 +16,7 @@ export class AuthComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
+    //Reactive form => signinForm
     this.signinForm = new FormGroup({
       username: new FormControl(null, [Validators.required]),
       password: new FormControl(null, [Validators.required]),
@@ -31,7 +32,7 @@ export class AuthComponent implements OnInit {
     const username = this.signinForm.value.username;
     const password = this.signinForm.value.password;
     this.isLoading = true;
-    // injecting service from authService
+    // injecting service from authService & calling api method
     this.authService.signin(username, password).subscribe((resData: any) => {
       console.log(resData);
       this.isLoading = false;

@@ -70,6 +70,7 @@
             <button
               class="btn btn-sm float-end"
               (click)="onNext()"
+              [disabled]="!selectedOption[currentIndex]" 
               style="background: #2c3d73; color: white"
             >
               {{

@@ -19,7 +19,7 @@
         <div class="col-md-2">
           <div
             class="btn"
-            style="background: #2c3d73; color: white; width: 100%"
+            [ngClass]="survey ? 'tab-active' : 'tab'"
             (click)="onSurvey()"
           >
             Survey
@@ -28,7 +28,7 @@
         <div class="col-md-3">
           <div
             class="btn"
-            style="background: #2c3d73; color: white; width: 100%"
+            [ngClass]="surveyDefinition ? 'tab-active' : 'tab'"
             (click)="onSurveyDefinition()"
           >
             Survey Definition
@@ -37,7 +37,7 @@
         <div class="col-md-4">
           <div
             class="btn"
-            style="background: #2c3d73; color: white; width: 100%"
+            [ngClass]="responseDefinition ? 'tab-active' : 'tab'"
             (click)="onResponseDefinition()"
           >
             Response Definition
@@ -46,7 +46,7 @@
         <div class="col-md-3">
           <div
             class="btn"
-            style="background: #2c3d73; color: white; width: 100%"
+            [ngClass]="alertDefinition ? 'tab-active' : 'tab'"
             (click)="onAlertDefinition()"
           >
             Alert Definition

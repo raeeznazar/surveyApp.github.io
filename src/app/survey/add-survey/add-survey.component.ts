@@ -87,7 +87,6 @@ export class AddSurveyComponent implements OnInit {
     });
 
     //Location
-
     this.dataStorageService
       .getLocations(this.localStorageUser.UserData.user_id)
       .subscribe((resData) => {
@@ -185,18 +184,6 @@ export class AddSurveyComponent implements OnInit {
       });
   }
 
-  // onChanges CALL
-  // onChangeDepartment(locationChange: any) {
-  //   this.dataStorageService
-  //     .getDepartments(locationChange, this.localStorageUser.UserData.user_id)
-  //     .subscribe((resData) => {
-  //       this.departments = resData.results;
-  //       this.surveyForm.patchValue({
-  //         department: this.departments[0].DepartmentId,
-  //       });
-  //     });
-  // }
-
   // to save forms
   onSave() {
     console.log(this.surveyForm.value);
@@ -280,10 +267,12 @@ export class AddSurveyComponent implements OnInit {
     }
   }
 
+  //Button to back to survey
   backToSurveys() {
     this.router.navigate(['sidebar/survey']);
   }
 
+  //Function to clone questions
   onCloneFromChanged(cloneFromId) {
     this.dataStorageService.getSurveyById(cloneFromId).subscribe((res: any) => {
       console.log(res);
