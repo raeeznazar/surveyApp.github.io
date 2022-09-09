@@ -23,7 +23,7 @@ export class TakeSurveyComponent implements OnInit {
   successMessage: any = '';
   successBox = false;
   finished = true;
-
+  descriptiveResponse: any = [];
   constructor(
     private dataStorageService: DataStorageService,
     private route: ActivatedRoute
@@ -59,17 +59,31 @@ export class TakeSurveyComponent implements OnInit {
   onNext() {
     //logic to add numbers
     if (this.currentIndex < this.takeSurveyQuestions.length - 1) {
-      // console.log('not last question');
+      console.log('not last question');
       this.currentIndex = this.currentIndex + 1;
     } else {
-      // console.log('last question');
+      console.log(this.currentIndex);
+      console.log('last question');
       this.surveyReply = [];
+      console.log(this.selectedOption);
       this.selectedOption.forEach((option, index) => {
-        this.surveyReply.push({
-          questionid: this.takeSurveyQuestions[index].questionid,
-          questionoptionid: option,
-          comments: '',
-        });
+        console.log(this.takeSurveyQuestions[index].questiontype.questiontypeid);
+        if (this.takeSurveyQuestions[index].questiontype.questiontypeid == 1) {
+          console.log(this.descriptiveResponse[this.currentIndex]);
+          this.surveyReply.push({
+            questionid: this.takeSurveyQuestions[index].questionid,
+            questionoptionid:
+              this.takeSurveyQuestions[index].question_details.question_option
+                .id,
+            comments: option,
+          });
+        } else {
+          this.surveyReply.push({
+            questionid: this.takeSurveyQuestions[index].questionid,
+            questionoptionid: option,
+            comments: '',
+          });
+        }
       });
 
       const body = {
@@ -80,36 +94,23 @@ export class TakeSurveyComponent implements OnInit {
 
       console.log(body);
 
-      this.dataStorageService
-        .postSurveDetails(body, this.paramsToken)
-        .subscribe((postedData: any) => {
-          if (postedData.Status == 0) {
-            this.successMessage = ' Congragulations, you finished the survey';
-            this.successBox = true;
-            this.finished = false;
-            console.log(postedData);
-          } else {
-            alert("'Sorry ! An Error Occur'");
-            this.errorMessage = 'Sorry ! An Error Occur';
-            this.finished = false;
-          }
-        });
+      // this.dataStorageService
+      //   .postSurveDetails(body, this.paramsToken)
+      //   .subscribe((postedData: any) => {
+      //     if (postedData.Status == 0) {
+      //       this.successMessage = ' Congragulations, you finished the survey';
+      //       this.successBox = true;
+      //       this.finished = false;
+      //       console.log(postedData);
+      //     } else {
+      //       alert("'Sorry ! An Error Occur'");
+      //       this.errorMessage = 'Sorry ! An Error Occur';
+      //       this.finished = false;
+      //     }
+      //   });
     }
     this.currentQuestion = this.takeSurveyQuestions[this.currentIndex];
     console.log(this.surveyReply);
-
-    // let replyIndex = this.surveyReply.findIndex(reply => reply.questionid == this.currentQuestion.questionid);
-    // if(replyIndex == -1) {
-    //   this.surveyReply.push({
-    //     questionid: this.currentQuestion.questionid,
-    //     questionoptionid: this.selectedOption,
-    //     comments: '',
-    //   });
-    // } else {
-    //   this.surveyReply[this.currentIndex].questionoptionid = this.selectedOption;
-    // }
-
-    // console.log(this.currentIndex);
   }
   //previous btn
   onPrevious() {
@@ -118,11 +119,5 @@ export class TakeSurveyComponent implements OnInit {
     }
     // console.log(this.currentIndex);
     this.currentQuestion = this.takeSurveyQuestions[this.currentIndex];
-    // this.surveyReply.push({
-    //   questionid: this.currentQuestion.questionid,
-    //   questionoptionid: this.selectedOption,
-    //   comments: '',
-    // });
-    // this.selectedOption = this.surveyReply[this.currentIndex].questionoptionid;
   }
 }
