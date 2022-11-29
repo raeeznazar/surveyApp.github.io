@@ -92,6 +92,13 @@ export class QuestionsComponent implements OnInit {
               this.questions[i].questions = feed;
             }
           });
+        } else {
+          alert(
+            resData.Message
+              ? resData.Message
+              : 'deletion not successfull because already exixts in survey'
+          );
+          this.showModal = false;
         }
       });
   }

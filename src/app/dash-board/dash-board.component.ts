@@ -44,13 +44,18 @@ export class DashBoardComponent implements OnInit {
     });
   }
 
+
+// Go to quetion page
   gotToQuestions() {
     this.router.navigate(['sidebar/questions']);
   }
 
+  //Go to survey page
   goToSurvey() {
     this.router.navigate(['sidebar/survey']);
   }
+
+  //Go to users page
   goToUsers() {
     this.router.navigate(['sidebar/users']);
   }

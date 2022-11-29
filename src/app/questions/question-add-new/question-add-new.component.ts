@@ -67,9 +67,9 @@ export class QuestionAddNewComponent implements OnInit {
   onAddQuestionForEdit(optionOrder, option, response, optionId) {
     (<FormArray>this.submitForm.get('addQuestionsArray')).push(
       new FormGroup({
-        questionOrder: new FormControl(optionOrder, [Validators.required]),
-        options: new FormControl(option, [Validators.required]),
-        response: new FormControl(response, [Validators.required]),
+        questionOrder: new FormControl(optionOrder),
+        options: new FormControl(option),
+        response: new FormControl(response),
         optionId: new FormControl(0),
       })
     );
@@ -102,7 +102,10 @@ export class QuestionAddNewComponent implements OnInit {
       text_box_type: 1,
       questionsubtypeid: null,
       image: '',
-      question_option: question_options,
+      question_option:
+        this.submitForm.controls['questionType'].value == 1
+          ? []
+          : question_options,
     };
 
     if (this.paramqId) {

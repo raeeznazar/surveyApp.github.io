@@ -171,7 +171,7 @@ export class UsersComponent implements OnInit {
               this.userId.UserData.client_id,
               this.usersForm.controls['location'].value,
               this.usersForm.controls['department'].value,
-              this.usersForm.controls['status'].value
+              this.usersForm.controls['status'].value,
             )
             .subscribe((resData) => {
               // console.log(resData);

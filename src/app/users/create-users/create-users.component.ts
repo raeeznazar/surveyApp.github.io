@@ -25,7 +25,7 @@ export class CreateUsersComponent implements OnInit {
   paramId: any = '';
   paramhId: any = '';
   paramdId: any = '';
-
+  successMessage = 'Successfully Registered ';
 
   constructor(
     private dataService: DataStorageService,
@@ -178,8 +178,6 @@ export class CreateUsersComponent implements OnInit {
       }
     });
 
-    
-
     //end of ngOnInit
   }
 
@@ -259,6 +257,7 @@ export class CreateUsersComponent implements OnInit {
         .subscribe((resData: any) => {
           if (resData.Status == 0) {
             this.successBox = true;
+            this.successMessage = 'Successfully editted';
             console.log(resData);
           } else {
             this.errorBox = true;
